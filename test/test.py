@@ -1,23 +1,22 @@
 # SPDX-FileCopyrightText: © 2024 Tiny Tapeout
 # SPDX-License-Identifier: MIT
-
+#imnport the coco functionality
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
-prbs_size=31 #size of the lsfr
-#fill two list with 0's
+prbs_size=31 #Size of the LSFR
+#Fill two lists with 0's
 PRBSN=[0]*prbs_size
 PRBSO=[0]*prbs_size
-#will not work if all the FFs are set to zero.
-#set highest register to 1
+#It will not work if all the FFs are set to zero.  
+#Set the highest register to 1
 PRBSO[prbs_size-1]=1
-#set number of clock cycles to test. 
+# Set number of clock cycles to test.
 n_clock=10000
 #set output lists to 1
-out=[1]*(n_clock) 
-#list containing the number 1 n_clock number of times. 
-# Run throughthe simulation to create the idealized output 
+out=[1]*(n_clock)
+# Run thoughthe simulation to create the idealized output.
 for i in range(n_clock):
   #input the feedback
   PRBSN[0]=PRBSO[27]^PRBSO[30]
@@ -27,10 +26,10 @@ for i in range(n_clock):
     PRBSN[count]=PRBSO[count-1]
   #update the array
   for j in range(len(PRBSN)):
-    PRBSO[j]=PRBSN[j]
-#take the output from the right most FF
-out[i]=PRBSN[prbs_size-1]
-#start the test
+    PRBSO[j]=PRBSN[j]    
+  #take the output from the rightmost FF.
+  out[i]=PRBSN[prbs_size-1]
+#Start the test  
 @cocotb.test() 
 async def test_project(dut):
     dut._log.info("Start")
