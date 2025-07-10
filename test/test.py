@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: © 2024 Tiny Tapeout
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 
 import cocotb
 from cocotb.clock import Clock
