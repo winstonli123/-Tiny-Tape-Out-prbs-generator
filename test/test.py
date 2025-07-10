@@ -18,10 +18,14 @@ n_clock=10000
 out=[1]*(n_clock) #list containing the number 1 n_clock number of times. 
 # Run throughthe simulation to create the idealized output 
 for i in range(n_clock):
-    #input the feedback
+  #input the feedback
+  PRBSN[0]=PRBSO[27]^PRBSO[30]
+  #shift the vlaues
+  for j in range(prbs_size-1):
+    count=prbs_size-j-1
     PRBSN[count]=PRBSO[count-1]
-    #update the array
-for j in range(len(PRBSN)):
+  #update the array
+  for j in range(len(PRBSN)):
     PRBSO[j]=PRBSN[j]
 #take the output from the right most FF
 out[i]=PRBSN[prbs_size-1]
